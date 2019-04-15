@@ -16,6 +16,86 @@
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
                 <h2>Messages</h2>
             </div>
+            <div class="card-columns">
+                <div class="card">
+                    <img class="card-img-top img-fluid" src="//placehold.it/800x600/555" alt="Card image cap">
+                </div>
+                <div class="card">
+                    <img class="card-img-top img-fluid" src="//placehold.it/800x600" alt="Card image cap">
+                </div>
+                <div class="card">
+                    <img class="card-img-top img-fluid" src="//placehold.it/800x600/eee" alt="Card image cap">
+                </div>
+                <div class="card">
+                    <img class="card-img-top img-fluid" src="//placehold.it/800x600/111/fff" alt="Card image cap">
+                </div>
+                <div class="card">
+                    <img class="card-img-top img-fluid" src="//placehold.it/800x600" alt="Card image cap">
+                </div>
+                <div class="card">
+                    <img class="card-img img-fluid" src="//placehold.it/800x1230/222" alt="Card image">
+                </div>
+                <div class="card">
+                    <img class="card-img-top img-fluid" src="//placehold.it/800x600/888/000" alt="Card image cap">
+                </div>
+                <div class="card">
+                    <img class="card-img-top img-fluid" src="//placehold.it/800x600" alt="Card image cap">
+                </div>
+                <div class="card">
+                    <img class="card-img-top img-fluid" src="//placehold.it/800x600" alt="Card image cap">
+                </div>
+                <div class="card">
+                    <img class="card-img-top img-fluid" src="//placehold.it/800x600/220022" alt="Card image cap">
+                </div>
+                <div class="card">
+                    <img class="card-img-top img-fluid" src="//placehold.it/800x600" alt="Card image cap">
+                </div>
+                <div class="card">
+                    <img class="card-img img-fluid" src="//placehold.it/800x1230/000/fff" alt="Card image">
+                </div>
+                <div class="card">
+                    <img class="card-img-top img-fluid" src="//placehold.it/800x600/55ff66/000" alt="Card image cap">
+                </div>
+                <div class="card">
+                    <img class="card-img-top img-fluid" src="//placehold.it/800x600" alt="Card image cap">
+                </div>
+                <div class="card">
+                    <img class="card-img img-fluid" src="//placehold.it/800x1230/cc4444/FFF" alt="Card image">
+                </div>
+                <div class="card">
+                    <img class="card-img-top img-fluid" src="//placehold.it/800x600" alt="Card image cap">
+                </div>
+                <div class="card">
+                    <img class="card-img-top img-fluid" src="//placehold.it/800x600" alt="Card image cap">
+                </div>
+                <div class="card">
+                    <img class="card-img-top img-fluid" src="//placehold.it/800x600/eee/000" alt="Card image cap">
+                </div>
+                <div class="card">
+                    <img class="card-img-top img-fluid" src="//placehold.it/800x600" alt="Card image cap">
+                </div>
+                <div class="card">
+                    <img class="card-img-top img-fluid" src="//placehold.it/800x600" alt="Card image cap">
+                </div>
+                <div class="card">
+                    <img class="card-img img-fluid" src="//placehold.it/800x1230/111/FFF" alt="Card image">
+                </div>
+                <div class="card">
+                    <img class="card-img-top img-fluid" src="//placehold.it/800x600" alt="Card image cap">
+                </div>
+                <div class="card">
+                    <img class="card-img-top img-fluid" src="//placehold.it/800x600/333" alt="Card image cap">
+                </div>
+                <div class="card">
+                    <img class="card-img-top img-fluid" src="//placehold.it/800x600" alt="Card image cap">
+                </div>
+                <div class="card">
+                    <img class="card-img-top img-fluid" src="//placehold.it/800x600/cc44cc/000" alt="Card image cap">
+                </div>
+                <div class="card">
+                    <img class="card-img-top img-fluid" src="//placehold.it/800x600" alt="Card image cap">
+                </div>
+            </div>
         </main>
     </div>
 </div>
