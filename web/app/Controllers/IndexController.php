@@ -1,13 +1,24 @@
 <?php
-namespace App\Contrllers;
+namespace App\Controllers;
+
+use App\Models\VisitorMessage;
 
 /**
  * Index Controller
  */
 class IndexController
 {
+	private $message;
+
     public function __construct()
     {
-        # code...
+        $this->message = new VisitorMessage();
+    }
+
+
+    public function getMessage($page = 1)
+    {
+    	$messages = $this->message->getMessages($page);
+    	return $messages;
     }
 }

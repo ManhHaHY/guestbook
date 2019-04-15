@@ -34,20 +34,18 @@ class VisitorMessage
      *
      * @return array Returns the page as an associative array
      */
-    public function get($slug)
+    public function getMessages($page = 1, $limit = 6)
     {
         try {
-            $results = $this->db->prepare("SELECT * FROM visitor_message WHERE id = ?");
-            $results->bindParam(1, $slug);
+            $results = $this->db->prepare("SELECT * FROM visitor_message limit $limit");
+            //$results->bindParam(1, $limit);
             $results->execute();
         } catch (\Exception $e) {
             echo $e->getMessage();
             die();
         }
 
-        $page = $results->fetch(PDO::FETCH_ASSOC);
-
-        return $page;
+        return $results->fetchAll(PDO::FETCH_ASSOC);
     }
 
     /**

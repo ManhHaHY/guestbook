@@ -2,6 +2,11 @@ body {
     font-size: .875rem;
 }
 
+@font-face {
+  font-family: 'The name of the Font Family Here';
+  src: url('../fonts/Caveat-Bold.ttf') format('truetype');
+}
+
 .feather {
     width: 16px;
     height: 16px;
@@ -118,4 +123,52 @@ body {
     .bd-placeholder-img-lg {
         font-size: 3.5rem;
     }
+}
+
+html, body {
+    height: 100%;
+    margin: 0px;
+}
+
+.btn-circle.btn-xl {
+    width: 70px;
+    height: 70px;
+    padding: 10px 16px;
+    border-radius: 35px;
+    font-size: 24px;
+    line-height: 1.33;
+}
+
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    padding: 6px 0px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.42857;
+}
+
+.visitor-name {
+    font-family: Caveat;
+    font-size: 26px;
+}
+
+.custom-pagination li a {
+    background: transparent;
+    border: none;
+    color: #fff;
+}
+
+.custom-pagination .page-item.active .page-link {
+    background: #dc3545;
+    border: none;
+    color: #fff;
+    border-radius: 15px;
+}
+
+.custom-pagination li a:hover {
+    border-radius: 15px !important;
+    background-color: #dc3545;
+    color: #fff;
 }
