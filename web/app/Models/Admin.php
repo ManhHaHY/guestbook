@@ -34,11 +34,12 @@ class Admin
      *
      * @return array Returns the page as an associative array
      */
-    public function get($slug)
+    public function checkAuthentication($email, $password)
     {
         try {
-            $results = $this->db->prepare("SELECT * FROM visitor_ WHERE slug = ?");
-            $results->bindParam(1, $slug);
+            $results = $this->db->prepare("SELECT * FROM admin WHERE email = ? and password = ?");
+            $results->bindParam(1, $email);
+            $results->bindParam(2, $password);
             $results->execute();
         } catch (\Exception $e) {
             echo $e->getMessage();
