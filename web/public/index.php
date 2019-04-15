@@ -6,6 +6,7 @@ use App\Controllers\IndexController;
 use App\Controllers\AdminController;
 
 $auth = new AuthService();
+$indexController = new IndexController();
 
 // view data
 $data = null;
@@ -30,7 +31,13 @@ if (isset($_REQUEST['logout'])) {
     header('Location: /');
     die();
 }
+
 if (isset($_REQUEST['password_reset'])) {
     $data['thank_you'] = 'You should receive an email with password reset instructions';
 }
+
+if($viewName == 'home' && !isset($_REQUEST['page'])){
+	$data = $indexController->getMessage();
+}
+
 view($viewName, $data);

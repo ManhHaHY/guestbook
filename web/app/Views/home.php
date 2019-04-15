@@ -17,85 +17,47 @@
                 <h2>Messages</h2>
             </div>
             <div class="card-columns">
-                <div class="card">
-                    <img class="card-img-top img-fluid" src="//placehold.it/800x600/555" alt="Card image cap">
+                <?php if(count($data) > 0): ?>
+                <?php foreach($data as $message): ?>
+                <div class="card bg-dark">
+                    <div class="card-block">
+                        <div class="card-text">
+                            <span class="pl-2">
+                                <?php echo $message['message']?>
+                            </span>
+                        </div>
+                        <div class="meta">
+                            <span class="visitor-name pl-2"><?php echo $message['visitor_name']?></span>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <small><?php echo date('dS M, Y') . ' at ' . date('H:i A') ?></small>
+                        <button class="btn btn-circle btn-danger float-right btn-sm ml-1"><i class="fas fa-trash"></i></button>
+                        <button class="btn btn-circle btn-danger float-right btn-sm"><i class="fas fa-pencil-alt"></i></button>
+                    </div>
                 </div>
-                <div class="card">
-                    <img class="card-img-top img-fluid" src="//placehold.it/800x600" alt="Card image cap">
-                </div>
-                <div class="card">
-                    <img class="card-img-top img-fluid" src="//placehold.it/800x600/eee" alt="Card image cap">
-                </div>
-                <div class="card">
-                    <img class="card-img-top img-fluid" src="//placehold.it/800x600/111/fff" alt="Card image cap">
-                </div>
-                <div class="card">
-                    <img class="card-img-top img-fluid" src="//placehold.it/800x600" alt="Card image cap">
-                </div>
-                <div class="card">
-                    <img class="card-img img-fluid" src="//placehold.it/800x1230/222" alt="Card image">
-                </div>
-                <div class="card">
-                    <img class="card-img-top img-fluid" src="//placehold.it/800x600/888/000" alt="Card image cap">
-                </div>
-                <div class="card">
-                    <img class="card-img-top img-fluid" src="//placehold.it/800x600" alt="Card image cap">
-                </div>
-                <div class="card">
-                    <img class="card-img-top img-fluid" src="//placehold.it/800x600" alt="Card image cap">
-                </div>
-                <div class="card">
-                    <img class="card-img-top img-fluid" src="//placehold.it/800x600/220022" alt="Card image cap">
-                </div>
-                <div class="card">
-                    <img class="card-img-top img-fluid" src="//placehold.it/800x600" alt="Card image cap">
-                </div>
-                <div class="card">
-                    <img class="card-img img-fluid" src="//placehold.it/800x1230/000/fff" alt="Card image">
-                </div>
-                <div class="card">
-                    <img class="card-img-top img-fluid" src="//placehold.it/800x600/55ff66/000" alt="Card image cap">
-                </div>
-                <div class="card">
-                    <img class="card-img-top img-fluid" src="//placehold.it/800x600" alt="Card image cap">
-                </div>
-                <div class="card">
-                    <img class="card-img img-fluid" src="//placehold.it/800x1230/cc4444/FFF" alt="Card image">
-                </div>
-                <div class="card">
-                    <img class="card-img-top img-fluid" src="//placehold.it/800x600" alt="Card image cap">
-                </div>
-                <div class="card">
-                    <img class="card-img-top img-fluid" src="//placehold.it/800x600" alt="Card image cap">
-                </div>
-                <div class="card">
-                    <img class="card-img-top img-fluid" src="//placehold.it/800x600/eee/000" alt="Card image cap">
-                </div>
-                <div class="card">
-                    <img class="card-img-top img-fluid" src="//placehold.it/800x600" alt="Card image cap">
-                </div>
-                <div class="card">
-                    <img class="card-img-top img-fluid" src="//placehold.it/800x600" alt="Card image cap">
-                </div>
-                <div class="card">
-                    <img class="card-img img-fluid" src="//placehold.it/800x1230/111/FFF" alt="Card image">
-                </div>
-                <div class="card">
-                    <img class="card-img-top img-fluid" src="//placehold.it/800x600" alt="Card image cap">
-                </div>
-                <div class="card">
-                    <img class="card-img-top img-fluid" src="//placehold.it/800x600/333" alt="Card image cap">
-                </div>
-                <div class="card">
-                    <img class="card-img-top img-fluid" src="//placehold.it/800x600" alt="Card image cap">
-                </div>
-                <div class="card">
-                    <img class="card-img-top img-fluid" src="//placehold.it/800x600/cc44cc/000" alt="Card image cap">
-                </div>
-                <div class="card">
-                    <img class="card-img-top img-fluid" src="//placehold.it/800x600" alt="Card image cap">
-                </div>
+                <?php endforeach;;?>
+                <?php endif;?>
             </div>
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center custom-pagination">
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&lt;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&gt;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </main>
     </div>
 </div>
