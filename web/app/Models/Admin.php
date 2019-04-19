@@ -5,9 +5,18 @@ use \PDO;
 
 class Admin
 {
+    static private $_instance = NULL;
+
     protected $id;
 
     protected $slug;
+
+    static function getInstance() {
+        if (self::$_instance == NULL) {
+            self::$_instance = new Admin();
+        }
+        return self::$_instance;
+    }
     
     /**
      * Create a new Admin Instance

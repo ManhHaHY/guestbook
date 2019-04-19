@@ -5,9 +5,19 @@ use \PDO;
 
 class VisitorMessage
 {
+
+    static private $_instance = NULL;
+
     protected $id;
 
     protected $slug;
+
+    static function getInstance() {
+        if (self::$_instance == NULL) {
+            self::$_instance = new VisitorMessage();
+        }
+        return self::$_instance;
+    }
     
     /**
      * Create a new VisitorMessage Instance
@@ -34,11 +44,10 @@ class VisitorMessage
      *
      * @return array Returns the page as an associative array
      */
-    public function getMessages($page = 1, $limit = 6)
+    public function getMessages($page = 1, $items = 6)
     {
         try {
-            $results = $this->db->prepare("SELECT * FROM visitor_message limit $limit");
-            //$results->bindParam(1, $limit);
+            $results = $this->db->prepare("SELECT * FROM visitor_message order by id limit $page, $items");
             $results->execute();
         } catch (\Exception $e) {
             echo $e->getMessage();
@@ -46,6 +55,20 @@ class VisitorMessage
         }
 
         return $results->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
+    public function countPagenumber()
+    {
+        try {
+            $results = $this->db->prepare("SELECT id FROM visitor_message");
+            $results->execute();
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+            die();
+        }
+
+        return $results->rowCount();
     }
 
     /**
@@ -58,14 +81,26 @@ class VisitorMessage
     public function create(array $data)
     {
         try {
+            // insert data to databse
             $sql = $this->db->prepare(
-                "INSERT INTO PAGES (title, slug, description, content) 
-                 VALUES (:title, :slug, :description, :content)"
+                "INSERT INTO visitor_message (message, visitor_name, created_at) 
+                 VALUES (:message, :visitor_name, :created_at)"
             );
-            $sql->bindParam(':title', $data['title']);
-            $sql->bindParam(':slug', $data['slug']);
-            $sql->bindParam(':description', $data['description']);
-            $sql->bindParam(':content', $data['content']);
+            $sql->bindParam(':message', $data['message']);
+            $sql->bindParam(':visitor_name', $data['visitorName']);
+            $sql->bindParam(':created_at', date('Y-m-d G:i:s'));
+            $sql->execute();
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+            die();
+        }
+    }
+
+    public function delete($id)
+    {
+        try{
+            $sql = $this->db->prepare("DELETE FROM visitor_message WHERE id = :id");
+            $sql->bindParam(":id", $id);
             $sql->execute();
         } catch (\Exception $e) {
             echo $e->getMessage();

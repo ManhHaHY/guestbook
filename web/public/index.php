@@ -7,6 +7,7 @@ use App\Controllers\AdminController;
 
 $auth = new AuthService();
 $indexController = new IndexController();
+$adminController = new AdminController();
 
 // view data
 $data = null;
@@ -38,6 +39,25 @@ if (isset($_REQUEST['password_reset'])) {
 
 if($viewName == 'home' && !isset($_REQUEST['page'])){
 	$data = $indexController->getMessage();
+}
+
+if (isset($_REQUEST['page'])) {
+	$page = $_REQUEST['page'];
+	if (is_numeric($page) && $_REQUEST['page'] > 0) {
+		$data = $indexController->getMessage($page);
+	}else{
+		$data = $indexController->getMessage();
+	}
+}
+
+if(isset($_REQUEST['add-message'])) {
+	$formData = $_POST;
+	$indexController->addMessage($formData);
+}
+
+if(isset($_REQUEST['delete-message'])) {
+	$formData = $_POST;
+	$adminController->deleteMessage($formData);
 }
 
 view($viewName, $data);

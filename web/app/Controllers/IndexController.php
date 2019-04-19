@@ -12,13 +12,40 @@ class IndexController
 
     public function __construct()
     {
-        $this->message = new VisitorMessage();
+        $this->message = VisitorMessage::getInstance();
     }
-
 
     public function getMessage($page = 1)
     {
-    	$messages = $this->message->getMessages($page);
-    	return $messages;
+    	$limitItems = 9;
+        $starting_limit = ($page - 1 ) * $limitItems;
+    	$messages = $this->message->getMessages($starting_limit, $limitItems);
+    	$totalResults = $this->message->countPagenumber();
+        $totalPages = ceil($totalResults / $limitItems);
+        $nextPage = ($page == $totalPages ? '' : $page + 1);
+        $prevPage = ($page <= 1 ? '' : $page - 1);
+    	return [
+    		'messages' => $messages,
+    		'totalPages' => $totalPages,
+    		'currentPage' => $page,
+    		'nextPage' => $nextPage,
+    		'prevPage' => $prevPage
+    	];
+    }
+
+    public function addMessage($formData)
+    {
+        $this->message->create($formData);
+        $this->jsonHeader([
+            'message' => 'Create new message success.',
+            'status' => 1
+        ]);
+    }
+
+    private function jsonHeader(array $data, $code = 200)
+    {
+        header('Content-Type: application/json');
+        http_response_code($code);
+        echo json_encode($data);exit;
     }
 }

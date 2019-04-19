@@ -151,7 +151,7 @@ html, body {
 
 .visitor-name {
     font-family: Caveat;
-    font-size: 26px;
+    font-size: 20px;
 }
 
 .custom-pagination li a {
@@ -171,4 +171,23 @@ html, body {
     border-radius: 15px !important;
     background-color: #dc3545;
     color: #fff;
+}
+
+.message {
+    font-size: 16px;
+}
+
+.card-text {
+    min-height: 170px;
+}
+
+.quote-card:before {
+  font-family: Georgia, serif;
+  content: "“";
+  position: absolute;
+  top: 20%;
+  left: 42%;
+  font-size: 9em;
+  color: rgba(238, 238, 238, 0.8);
+  font-weight: normal;
 }
