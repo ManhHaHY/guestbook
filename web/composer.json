@@ -1,0 +1,16 @@
+{
+    "name": "manhha/guestbook",
+    "description": "Sample PSR-4 website guestbook.",
+    "authors": [
+        {
+            "name": "Ha Tran",
+            "email": "manhhaniit@gmail.com"
+        }
+    ],
+    "require": {},
+     "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    }
+}
