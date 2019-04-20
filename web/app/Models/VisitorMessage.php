@@ -5,9 +5,19 @@ use \PDO;
 
 class VisitorMessage
 {
+
+    static private $_instance = NULL;
+
     protected $id;
 
     protected $slug;
+
+    static function getInstance() {
+        if (self::$_instance == NULL) {
+            self::$_instance = new VisitorMessage();
+        }
+        return self::$_instance;
+    }
     
     /**
      * Create a new VisitorMessage Instance
@@ -28,17 +38,17 @@ class VisitorMessage
     }
 
     /**
-     * Get page by slug
+     * Get all messages
      *
-     * @param string $slug to look up in database
+     * @param string $page to look up in database
+     * @param int $items to look up in database
      *
-     * @return array Returns the page as an associative array
+     * @return array Returns the messages as an associative array
      */
-    public function getMessages($page = 1, $limit = 6)
+    public function getMessages($page = 1, $items = 6)
     {
         try {
-            $results = $this->db->prepare("SELECT * FROM visitor_message limit $limit");
-            //$results->bindParam(1, $limit);
+            $results = $this->db->prepare("SELECT * FROM visitor_message order by id desc limit $page, $items");
             $results->execute();
         } catch (\Exception $e) {
             echo $e->getMessage();
@@ -49,23 +59,94 @@ class VisitorMessage
     }
 
     /**
-     * Create new page
+     * Get message by id
      *
-     * @param array $data information to create page with
+     * @param int $id to look up in database
      *
-     * @return null
+     * @return array Returns the message as an associative array
+     */
+    public function getMessage($id)
+    {
+        try {
+            $result = $this->db->prepare("SELECT * FROM visitor_message where id = :id  LIMIT 1");
+            $result->bindParam(':id', $id);
+            $result->execute();
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+            die();
+        }
+
+        return $result->fetch(PDO::FETCH_ASSOC);
+    }
+
+
+    public function countPagenumber()
+    {
+        try {
+            $results = $this->db->prepare("SELECT id FROM visitor_message");
+            $results->execute();
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+            die();
+        }
+
+        return $results->rowCount();
+    }
+
+    /**
+     * Create new message
+     *
+     * @param array $data information to create message with
+     *
+     * @return int lastInsertId
      */
     public function create(array $data)
     {
         try {
+            // insert data to databse
             $sql = $this->db->prepare(
-                "INSERT INTO PAGES (title, slug, description, content) 
-                 VALUES (:title, :slug, :description, :content)"
+                "INSERT INTO visitor_message (message, visitor_name, created_at) 
+                 VALUES (:message, :visitor_name, now())"
             );
-            $sql->bindParam(':title', $data['title']);
-            $sql->bindParam(':slug', $data['slug']);
-            $sql->bindParam(':description', $data['description']);
-            $sql->bindParam(':content', $data['content']);
+            $sql->bindParam(':message', $data['message']);
+            $sql->bindParam(':visitor_name', $data['visitorName']);
+            $sql->execute();
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+            die();
+        }
+        $lastId = $this->db->lastInsertId();
+        return $lastId;
+    }
+
+    public function update($id, array $data)
+    {
+        try {
+            // update data to databse
+            $sql = $this->db->prepare(
+                "UPDATE visitor_message SET message=:message, visitor_name=:visitor_name WHERE id=:id"
+            );
+            $sql->bindParam(':id', $id);
+            $sql->bindParam(':message', $data['message']);
+            $sql->bindParam(':visitor_name', $data['visitor_name']);
+            $sql->execute();
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+            die();
+        }
+        return true;
+    }
+
+    /**
+    * function remove an message by id
+    *
+    * @param int $id
+    */
+    public function delete($id)
+    {
+        try{
+            $sql = $this->db->prepare("DELETE FROM visitor_message WHERE id = :id");
+            $sql->bindParam(":id", $id);
             $sql->execute();
         } catch (\Exception $e) {
             echo $e->getMessage();
