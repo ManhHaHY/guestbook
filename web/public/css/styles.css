@@ -1,9 +1,10 @@
 body {
     font-size: .875rem;
+    font-family: 'IBM Plex Sans';
 }
 
 @font-face {
-  font-family: 'The name of the Font Family Here';
+  font-family: 'Caveat-Bold';
   src: url('../fonts/Caveat-Bold.ttf') format('truetype');
 }
 

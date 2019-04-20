@@ -1,6 +1,4 @@
 $(function(){
-	feather.replace();
-
 	$('.btnPostNewMessage').on('click', function () {
 		$('.submitNewMessage').text('Submit');
 		$('#newMessageModalLabel').text('Send New Message');
