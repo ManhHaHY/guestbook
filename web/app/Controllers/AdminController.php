@@ -19,11 +19,25 @@ class AdminController
     	$this->admin = Admin::getInstance();
     }
 
+    public function getMessage($id)
+    {
+    	$this->checkAuth();
+    	$message = $this->message->getMessage($id);
+    	$this->jsonHeader($message);
+    }
+
     public function editMessage($formData)
     {
     	$this->checkAuth();
-    	$this->message->edit($formData);
-    	$this->jsonHeader();
+    	$this->message->update($formData['messageId'], [
+    		'visitor_name' => $formData['visitorName'],
+    		'message' => $formData['message']
+    	]);
+    	$this->jsonHeader([
+    		'message' => 'Update message success.',
+            'status' => 1,
+            'messageData' => $formData,
+    	]);
     }
 
     public function deleteMessage($formData)

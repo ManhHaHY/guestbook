@@ -46,42 +46,16 @@ class Admin
     public function checkAuthentication($email, $password)
     {
         try {
-            $results = $this->db->prepare("SELECT * FROM admin WHERE email = ? and password = ?");
-            $results->bindParam(1, $email);
-            $results->bindParam(2, $password);
-            $results->execute();
+            $result = $this->db->prepare("SELECT * FROM admin WHERE email = ? and password = ?");
+            $result->bindParam(1, $email);
+            $result->bindParam(2, $password);
+            $result->execute();
         } catch (\Exception $e) {
             echo $e->getMessage();
             die();
         }
 
-        $page = $results->fetch(PDO::FETCH_ASSOC);
-
-        return $page;
+        return $result->fetch(PDO::FETCH_ASSOC);
     }
 
-    /**
-     * Create new page
-     *
-     * @param array $data information to create page with
-     *
-     * @return null
-     */
-    public function create(array $data)
-    {
-        try {
-            $sql = $this->db->prepare(
-                "INSERT INTO PAGES (title, slug, description, content) 
-                 VALUES (:title, :slug, :description, :content)"
-            );
-            $sql->bindParam(':title', $data['title']);
-            $sql->bindParam(':slug', $data['slug']);
-            $sql->bindParam(':description', $data['description']);
-            $sql->bindParam(':content', $data['content']);
-            $sql->execute();
-        } catch (\Exception $e) {
-            echo $e->getMessage();
-            die();
-        }
-    }
 }

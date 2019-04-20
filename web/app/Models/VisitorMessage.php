@@ -38,16 +38,17 @@ class VisitorMessage
     }
 
     /**
-     * Get page by slug
+     * Get all messages
      *
-     * @param string $slug to look up in database
+     * @param string $page to look up in database
+     * @param int $items to look up in database
      *
-     * @return array Returns the page as an associative array
+     * @return array Returns the messages as an associative array
      */
     public function getMessages($page = 1, $items = 6)
     {
         try {
-            $results = $this->db->prepare("SELECT * FROM visitor_message order by id limit $page, $items");
+            $results = $this->db->prepare("SELECT * FROM visitor_message order by id desc limit $page, $items");
             $results->execute();
         } catch (\Exception $e) {
             echo $e->getMessage();
@@ -55,6 +56,27 @@ class VisitorMessage
         }
 
         return $results->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Get message by id
+     *
+     * @param int $id to look up in database
+     *
+     * @return array Returns the message as an associative array
+     */
+    public function getMessage($id)
+    {
+        try {
+            $result = $this->db->prepare("SELECT * FROM visitor_message where id = :id  LIMIT 1");
+            $result->bindParam(':id', $id);
+            $result->execute();
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+            die();
+        }
+
+        return $result->fetch(PDO::FETCH_ASSOC);
     }
 
 
@@ -72,11 +94,11 @@ class VisitorMessage
     }
 
     /**
-     * Create new page
+     * Create new message
      *
-     * @param array $data information to create page with
+     * @param array $data information to create message with
      *
-     * @return null
+     * @return int lastInsertId
      */
     public function create(array $data)
     {
@@ -84,18 +106,42 @@ class VisitorMessage
             // insert data to databse
             $sql = $this->db->prepare(
                 "INSERT INTO visitor_message (message, visitor_name, created_at) 
-                 VALUES (:message, :visitor_name, :created_at)"
+                 VALUES (:message, :visitor_name, now())"
             );
             $sql->bindParam(':message', $data['message']);
             $sql->bindParam(':visitor_name', $data['visitorName']);
-            $sql->bindParam(':created_at', date('Y-m-d G:i:s'));
             $sql->execute();
         } catch (\Exception $e) {
             echo $e->getMessage();
             die();
         }
+        $lastId = $this->db->lastInsertId();
+        return $lastId;
     }
 
+    public function update($id, array $data)
+    {
+        try {
+            // update data to databse
+            $sql = $this->db->prepare(
+                "UPDATE visitor_message SET message=:message, visitor_name=:visitor_name WHERE id=:id"
+            );
+            $sql->bindParam(':id', $id);
+            $sql->bindParam(':message', $data['message']);
+            $sql->bindParam(':visitor_name', $data['visitor_name']);
+            $sql->execute();
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+            die();
+        }
+        return true;
+    }
+
+    /**
+    * function remove an message by id
+    *
+    * @param int $id
+    */
     public function delete($id)
     {
         try{

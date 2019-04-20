@@ -55,6 +55,17 @@ if(isset($_REQUEST['add-message'])) {
 	$indexController->addMessage($formData);
 }
 
+if(isset($_REQUEST['edit-message'])) {
+	if($_SERVER['REQUEST_METHOD'] === 'GET'){
+		$adminController->getMessage($_GET['messageId']);
+	}
+	if($_SERVER['REQUEST_METHOD'] === 'POST'){
+		$formData = $_POST;
+		$adminController->editMessage($formData);
+	}
+	
+}
+
 if(isset($_REQUEST['delete-message'])) {
 	$formData = $_POST;
 	$adminController->deleteMessage($formData);

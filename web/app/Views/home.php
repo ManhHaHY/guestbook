@@ -8,7 +8,7 @@
                     Feel free to leave us a short message to tell us what you think to our services.
                 </p>
                 <p class="px-5">
-                    <button class="btn text-light bg-danger w-100" data-toggle="modal" data-target="#newMessageModal">Post a Message</button>
+                    <button class="btn text-light bg-danger w-100 btnPostNewMessage" data-toggle="modal" data-target="#newMessageModal">Post a Message</button>
                 </p>
             </div>
         </nav>
@@ -22,23 +22,25 @@
                 <div class="card bg-dark">
                     <div class="card-block quote-card">
                         <div class="card-text">
-                            <span class="pl-2 message">
+                            <span class="pl-2 message" data-id="<?php echo $message['id']?>">
                                 <?php echo $message['message']?>
                             </span>
                         </div>
                         <div class="meta">
-                            <span class="visitor-name pl-2">
+                            <span class="visitor-name pl-2" data-id="<?php echo $message['id']?>">
                                 <?php echo $message['visitor_name']?>
                             </span>
                         </div>
                     </div>
                     <div class="card-footer">
-                        <small><?php echo date('dS M, Y') . ' at ' . date('H:i A') ?></small>
+                        <small><?php echo date('dS M, Y', strtotime($message['created_at'])) 
+                        . ' at ' . date('H:i A', strtotime($message['created_at'])) ?></small>
                         <?php if (isset($_SESSION['username'])): ?>
                         <button class="btn btn-circle btn-danger float-right btn-sm ml-1 delete-message" data-id="<?php echo $message['id']?>">
                             <i class="fas fa-trash"></i>
                         </button>
-                        <button class="btn btn-circle btn-danger float-right btn-sm edit-message"  data-id="<?php echo $message['id']?>">
+                        <button class="btn btn-circle btn-danger float-right btn-sm edit-message" data-id="<?php echo $message['id']?>"
+                            data-toggle="modal" data-target="#newMessageModal">
                             <i class="fas fa-pencil-alt"></i>
                         </button>
                         <?php endif;?>
@@ -103,6 +105,7 @@
                 </form>
             </div>
             <div class="modal-footer">
+                <input type="hidden" id="editMessageId">
                 <button type="button" class="btn btn-secondary close-message-form" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary submitNewMessage" 
                 data-loading-text='<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...'>Submit</button>

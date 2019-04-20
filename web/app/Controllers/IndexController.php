@@ -35,10 +35,19 @@ class IndexController
 
     public function addMessage($formData)
     {
-        $this->message->create($formData);
+        $insertId = $this->message->create($formData);
+        $newData = $this->message->getMessage($insertId);
+        $messageData = [
+            'id' => $newData['id'],
+            'visitor_name' => $newData['visitor_name'],
+            'message' => $newData['message'],
+            'created_at' => date('dS M, Y', strtotime($newData['created_at'])) . ' at ' . date('H:i A', strtotime($newData['created_at'])),
+        ];
         $this->jsonHeader([
             'message' => 'Create new message success.',
-            'status' => 1
+            'status' => 1,
+            'messageData' => $messageData,
+            'isLogin' => (isset($_SESSION['username']) ? true : false),
         ]);
     }
 
