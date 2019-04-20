@@ -1,6 +1,6 @@
-CREATE DATABASE guestbook
+/*CREATE DATABASE guestbook
 CHARACTER SET utf8
-COLLATE utf8_general_ci;
+COLLATE utf8_general_ci;*/
 
 DROP TABLE IF EXISTS `admin`;
 
