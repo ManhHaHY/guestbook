@@ -1,0 +1,3 @@
+web/vendor/
+web/.php_cs.cache
+web/composer-lock.json
